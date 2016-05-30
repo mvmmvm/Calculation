@@ -49,9 +49,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNumber(View v) {
+
         number = numberWindow.getText().toString();
         formula = formulaWindow.getText().toString();
         String inputNumber;
+
+        // ここで既に入力された桁数を確認する
+        // TODO 上限に達している場合以降の処理を行わない。
+        // 小数点("." が含まれる）場合、上限桁数に＋１する
 
         switch (v.getId()) {
 
@@ -110,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
             isInput = false;
         }
         num2 = Double.parseDouble(number);
+        //ここは変換時にエラーが起こる可能性があるため、気を付ける。（try+catch等）
+        //
     }
 
     public void onSymbol(View v) {
@@ -140,12 +147,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        formulaWindow.setText(number + " " + symbol);
+        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
         num1 = Double.parseDouble(number);
         isInput = true;
+        //ここでnum1(一つ目の数字[A+B=のA]がセットされたことを判断するためのisInputをtrueにする。)
 
     }
 
+    /**
+     * 計算結果を表示する。
+     * @param v
+     */
     public void onResult(View v){
         number = numberWindow.getText().toString();
         formula = formulaWindow.getText().toString();
