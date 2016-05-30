@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     String number;
     String formula;
     Resources res;
+    char c;
 
 
 
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         formula = formulaWindow.getText().toString();
         String inputNumber;
 
-        // ‚±‚±‚ÅŠù‚É“ü—Í‚³‚ê‚½Œ…”‚ğŠm”F‚·‚é
-        // TODO ãŒÀ‚É’B‚µ‚Ä‚¢‚éê‡ˆÈ~‚Ìˆ—‚ğs‚í‚È‚¢B
-        // ¬”“_("." ‚ªŠÜ‚Ü‚ê‚éjê‡AãŒÀŒ…”‚É{‚P‚·‚é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ÅŠï¿½ï¿½É“ï¿½ï¿½Í‚ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½Fï¿½ï¿½ï¿½ï¿½
+        // TODO ï¿½ï¿½ï¿½ï¿½É’Bï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½È~ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½È‚ï¿½ï¿½B
+        // ï¿½ï¿½ï¿½ï¿½ï¿½_("." ï¿½ï¿½ï¿½Ü‚Ü‚ï¿½ï¿½jï¿½ê‡ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É{ï¿½Pï¿½ï¿½ï¿½ï¿½
 
         switch (v.getId()) {
 
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             isInput = false;
         }
         num2 = Double.parseDouble(number);
-        //‚±‚±‚Í•ÏŠ·‚ÉƒGƒ‰[‚ª‹N‚±‚é‰Â”\«‚ª‚ ‚é‚½‚ßA‹C‚ğ•t‚¯‚éBitry+catch“™j
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Í•ÏŠï¿½ï¿½ï¿½ï¿½ÉƒGï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½Â”\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßAï¿½Cï¿½ï¿½tï¿½ï¿½ï¿½ï¿½Bï¿½itry+catchï¿½ï¿½ï¿½j
         //
     }
 
@@ -147,17 +148,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        formulaWindow.setText(number + " " + symbol); // ã•”‚ÉŒ»İ‚Ì“ü—ÍŒ‹‰Ê‚ğ•\¦
+        formulaWindow.setText(number + " " + symbol); // ï¿½ã•”ï¿½ÉŒï¿½ï¿½İ‚Ì“ï¿½ï¿½ÍŒï¿½ï¿½Ê‚ï¿½\ï¿½ï¿½
         num1 = Double.parseDouble(number);
         isInput = true;
-        //‚±‚±‚Ånum1(ˆê‚Â–Ú‚Ì”š[A+B=‚ÌA]‚ªƒZƒbƒg‚³‚ê‚½‚±‚Æ‚ğ”»’f‚·‚é‚½‚ß‚ÌisInput‚ğtrue‚É‚·‚éB)
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½num1(ï¿½ï¿½Â–Ú‚Ìï¿½ï¿½ï¿½[A+B=ï¿½ï¿½A]ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Æ‚ğ”»’fï¿½ï¿½ï¿½é‚½ï¿½ß‚ï¿½isInputï¿½ï¿½trueï¿½É‚ï¿½ï¿½ï¿½B)
 
     }
 
-    /**
-     * ŒvZŒ‹‰Ê‚ğ•\¦‚·‚éB
-     * @param v
-     */
     public void onResult(View v){
         number = numberWindow.getText().toString();
         formula = formulaWindow.getText().toString();
