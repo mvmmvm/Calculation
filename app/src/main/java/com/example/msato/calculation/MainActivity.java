@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     String number;
     String formula;
     Resources res;
-    char c;
 
 
 
@@ -55,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         formula = formulaWindow.getText().toString();
         String inputNumber;
 
-        // �����Ŋ��ɓ��͂��ꂽ�������m�F����
-        // TODO ����ɒB���Ă���ꍇ�ȍ~�̏������s��Ȃ��B
-        // �����_("." ���܂܂��j�ꍇ�A��������Ɂ{�P����
+        // ここで既に入力された桁数を確認する
+        // TODO 上限に達している場合以降の処理を行わない。
+        // 小数点("." が含まれる）場合、上限桁数に＋１する
 
         switch (v.getId()) {
 
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             isInput = false;
         }
         num2 = Double.parseDouble(number);
-        //�����͕ϊ����ɃG���[���N����\�������邽�߁A�C��t����B�itry+catch���j
+        //ここは変換時にエラーが起こる可能性があるため、気を付ける。（try+catch等）
         //
     }
 
@@ -148,13 +147,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        formulaWindow.setText(number + " " + symbol); // �㕔�Ɍ��݂̓��͌��ʂ�\��
+        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
         num1 = Double.parseDouble(number);
         isInput = true;
-        //������num1(��ڂ̐���[A+B=��A]���Z�b�g���ꂽ���Ƃ𔻒f���邽�߂�isInput��true�ɂ���B)
+        //ここでnum1(一つ目の数字[A+B=のA]がセットされたことを判断するためのisInputをtrueにする。)
 
     }
 
+    /**
+     * 計算結果を表示する。
+     * @param v
+     */
     public void onResult(View v){
         number = numberWindow.getText().toString();
         formula = formulaWindow.getText().toString();
@@ -202,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-}
+    }
 
 
     @Override
