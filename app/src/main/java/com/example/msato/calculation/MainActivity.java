@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView numberWindow;
-    TextView formulaWindow;
+//    TextView numberWindow;
+//    TextView formulaWindow;
     double num1;
     double num2;
     long numLong;
@@ -27,22 +27,26 @@ public class MainActivity extends AppCompatActivity {
     String formula;
     Resources res;
 
-
+    //TODO 小数点入力
+    //TODO 桁数を制限する
+    //TODO オーバフローを制御する
+    //TODO クラス変数を削除する
+    //TODO 計算用のクラスを作る
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        numberWindow = (TextView)findViewById(R.id.number);
-        formulaWindow = (TextView)findViewById(R.id.formula);
         res = getResources();
 
     }
 
     public void onClear(View v){
-        numberWindow.setText("0");
-        formulaWindow.setText("");
+//        numberWindow.setText("0");
+//        formulaWindow.setText("");
+        setTextNumberWindow("0");
+        setTextNumberWindow("");
         num1 = 0;
         num2 = 0;
 
@@ -50,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNumber(View v) {
 
-        number = numberWindow.getText().toString();
-        formula = formulaWindow.getText().toString();
+        number = getTextNumberWindow();
+        formula = getTextFormulaWindow();
         String inputNumber;
 
         // ここで既に入力された桁数を確認する
@@ -106,11 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isInput && !number.equals("0")) {
             number = number + inputNumber;
-            numberWindow.setText(number);
+//            numberWindow.setText(number);
         } else {
             number = inputNumber;
-            numberWindow.setText(number);
+//            numberWindow.setText(number);
         }
+        setTextNumberWindow(number);
         if (isInput) {
             isInput = false;
         }
@@ -120,8 +125,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSymbol(View v) {
-        number = numberWindow.getText().toString();
-        formula = formulaWindow.getText().toString();
+//        number = numberWindow.getText().toString();
+//        formula = formulaWindow.getText().toString();
+
+        number = getTextNumberWindow();
+        formula = getTextFormulaWindow();
 
 
         switch (v.getId()){
@@ -147,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
+//        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
+        setTextFormulaWindow(number + " " + symbol);
         num1 = Double.parseDouble(number);
         isInput = true;
         //ここでnum1(一つ目の数字[A+B=のA]がセットされたことを判断するためのisInputをtrueにする。)
@@ -159,8 +168,10 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void onResult(View v){
-        number = numberWindow.getText().toString();
-        formula = formulaWindow.getText().toString();
+//        number = numberWindow.getText().toString();
+//        formula = formulaWindow.getText().toString();
+        number = getTextNumberWindow();
+        formula = getTextFormulaWindow();
         if(!number.equals("") && symbol != null){
 
             switch (symbol){
@@ -191,12 +202,15 @@ public class MainActivity extends AppCompatActivity {
 
             if(num1 % 1 == 0){
                 numLong = (long)num1;
-                numberWindow.setText(Long.toString(numLong));
+//                numberWindow.setText(Long.toString(numLong));
+                setTextNumberWindow(Long.toString(numLong));
             }else{
-                numberWindow.setText(Double.toString(num1));
+//                numberWindow.setText(Double.toString(num1));
+                setTextNumberWindow(Double.toString(num1));
             }
 
-            formulaWindow.setText("");
+//            formulaWindow.setText("");
+            setTextFormulaWindow("");
 
 
 
@@ -242,5 +256,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setTextNumberWindow(String s) {
+        TextView numberWindow;
+        numberWindow = (TextView)findViewById(R.id.number);
+        numberWindow.setText(s);
+    }
+
+    private void setTextFormulaWindow(String s) {
+        TextView formulaWindow;
+        formulaWindow = (TextView)findViewById(R.id.formula);
+        formulaWindow.setText(s);
+    }
+
+    private String getTextNumberWindow() {
+        return ((TextView) findViewById(R.id.number)).getText().toString();
+    }
+
+    private String getTextFormulaWindow() {
+        return ((TextView) findViewById(R.id.formula)).getText().toString();
     }
 }
