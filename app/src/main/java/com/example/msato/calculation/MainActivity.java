@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     String number;
     String formula;
     Resources res;
+    char c;
 
     //TODO 小数点入力
     //TODO 桁数を制限する
