@@ -53,28 +53,32 @@
             <Button
                 android:id="@+id/mc"
                 android:layout_column="0"
-                android:text="@string/mc"/>
+                android:text="@string/mc"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/mr"
                 android:layout_column="1"
                 android:text="mr"
-                 />
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/ms"
                 android:layout_column="2"
-                android:text="ms"/>
+                android:text="ms"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/mplus"
                 android:layout_column="3"
-                android:text="@string/mplus"/>
+                android:text="@string/mplus"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/mminus"
                 android:layout_column="4"
-                android:text="@string/mminus"/>
+                android:text="@string/mminus"
+                android:textColor="@android:color/holo_red_dark"/>
 
 
         </TableRow>
@@ -84,12 +88,14 @@
             <Button
                 android:id="@+id/back_space"
                 android:layout_column="0"
-                android:text="@string/back_space"/>
+                android:text="@string/back_space"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/ce"
                 android:layout_column="1"
-                android:text="@string/ce"/>
+                android:text="@string/ce"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/c"
@@ -100,12 +106,14 @@
             <Button
                 android:id="@+id/plus_minus"
                 android:layout_column="3"
-                android:text="@string/plus_minus"/>
+                android:text="@string/plus_minus"
+                android:textColor="@android:color/holo_red_dark"/>
 
             <Button
                 android:id="@+id/root"
                 android:layout_column="4"
-                android:text="@string/root"/>
+                android:text="@string/root"
+                android:textColor="@android:color/holo_red_dark"/>
 
         </TableRow>
 
@@ -138,7 +146,8 @@
             <Button
                 android:id="@+id/percent"
                 android:layout_column="4"
-                android:text="@string/percent"/>
+                android:text="@string/percent"
+                android:textColor="@android:color/holo_red_dark"/>
 
         </TableRow>
 
@@ -172,7 +181,8 @@
             <Button
                 android:id="@+id/one_divided_by_x"
                 android:layout_column="4"
-                android:text="@string/one_divided_by_x"/>
+                android:text="@string/one_divided_by_x"
+                android:textColor="@android:color/holo_red_dark"/>
 
         </TableRow>
 
@@ -216,7 +226,8 @@
             <Button
                 android:id="@+id/dot"
                 android:layout_column="1"
-                android:text="@string/dot"/>
+                android:text="@string/dot"
+                android:onClick="onNumber"/>
 
             <Button
                 android:id="@+id/plus"

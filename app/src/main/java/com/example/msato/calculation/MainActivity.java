@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
 //    TextView numberWindow;
 //    TextView formulaWindow;
+
+
     double num1;
     double num2;
     long numLong;
@@ -105,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
                 inputNumber = "9";
                 break;
 
+            case R.id.dot:
+                inputNumber = ".";
+                break;
+
             default:
                 return;
         }
@@ -120,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         if (isInput) {
             isInput = false;
         }
-        num2 = Double.parseDouble(number);
+//        num2 = Double.parseDouble(number);
         //ここは変換時にエラーが起こる可能性があるため、気を付ける。（try+catch等）
         //
     }
@@ -131,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         number = getTextNumberWindow();
         formula = getTextFormulaWindow();
+
 
 
         switch (v.getId()){
@@ -153,11 +160,18 @@ public class MainActivity extends AppCompatActivity {
             case R.id.percent:
                 symbol = res.getString(R.string.percent);
                 break;
+
+
         }
 
 
 //        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
         setTextFormulaWindow(number + " " + symbol);
+
+        if(num1 != 0) {
+            calculateNumber();
+        }
+
         num1 = Double.parseDouble(number);
         isInput = true;
         //ここでnum1(一つ目の数字[A+B=のA]がセットされたことを判断するためのisInputをtrueにする。)
@@ -171,8 +185,14 @@ public class MainActivity extends AppCompatActivity {
     public void onResult(View v){
 //        number = numberWindow.getText().toString();
 //        formula = formulaWindow.getText().toString();
+        calculateNumber();
+
+    }
+
+    private void calculateNumber() {
         number = getTextNumberWindow();
         formula = getTextFormulaWindow();
+        num2 = Double.parseDouble(number);
         if(!number.equals("") && symbol != null){
 
             switch (symbol){
@@ -196,13 +216,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-
-
-
-
-
             if(num1 % 1 == 0){
-                numLong = (long)num1;
+                numLong = (long)num1;   //
 //                numberWindow.setText(Long.toString(numLong));
                 setTextNumberWindow(Long.toString(numLong));
             }else{
@@ -213,13 +228,7 @@ public class MainActivity extends AppCompatActivity {
 //            formulaWindow.setText("");
             setTextFormulaWindow("");
 
-
-
-
-
-
         }
-
     }
 
 
