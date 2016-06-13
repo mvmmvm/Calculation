@@ -1,34 +1,33 @@
 package com.example.msato.calculation;
 
-import android.app.ActionBar;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
 //    TextView numberWindow;
 //    TextView formulaWindow;
 
+    BigDecimal dcm;
 
-    double num1;
-    double num2;
-    long numLong;
+    double dResult;
+    double dCalcNum;
+    long lngResult;
     String symbol;
     boolean isInput;
-    String number;
-    String formula;
+    // 大きな画面に表示する値
+    String dispNumber;
+    String dispFormula;
     Resources res;
-    char c;
 
     //TODO 小数点入力
     //TODO 桁数を制限する
@@ -45,20 +44,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 空にする
     public void onClear(View v){
 //        numberWindow.setText("0");
 //        formulaWindow.setText("");
         setTextNumberWindow("0");
-        setTextNumberWindow("");
-        num1 = 0;
-        num2 = 0;
+        setTextFormulaWindow("");
+        dResult = 0;
+        dCalcNum = 0;
 
     }
 
     public void onNumber(View v) {
 
-        number = getTextNumberWindow();
-        formula = getTextFormulaWindow();
+        // 大きな画面の数字を取得
+        dispNumber = getTextNumberWindow();
+        // 小さな画面の数値を取得
+        dispFormula = getTextFormulaWindow();
+        // 入力した文字を保持
         String inputNumber;
 
         // ここで既に入力された桁数を確認する
@@ -115,30 +118,39 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
 
-        if (!isInput && !number.equals("0")) {
-            number = number + inputNumber;
-//            numberWindow.setText(number);
+        // 入力値が0でない場合、かつ既に値が入ってる場合
+        // 大きな画面に入力値を追加する
+        if (!isInput && !dispNumber.equals("0")) {
+            dispNumber = dispNumber + inputNumber;
+//            numberWindow.setText(dispNumber);
         } else {
-            number = inputNumber;
-//            numberWindow.setText(number);
+            // 入力値が0か、まだ値が入っていない場合、
+            // 大きな画面＝入力値とする
+            dispNumber = inputNumber;
+//            numberWindow.setText(dispNumber);
         }
-        setTextNumberWindow(number);
+        // 大きな画面に値を反映する。
+        setTextNumberWindow(dispNumber);
+        // ?
         if (isInput) {
             isInput = false;
         }
-//        num2 = Double.parseDouble(number);
+//        dCalcNum = Double.parseDouble(dispNumber);
         //ここは変換時にエラーが起こる可能性があるため、気を付ける。（try+catch等）
         //
     }
 
     public void onSymbol(View v) {
-//        number = numberWindow.getText().toString();
-//        formula = formulaWindow.getText().toString();
+//        dispNumber = numberWindow.getText().toString();
+//        dispFormula = formulaWindow.getText().toString();
 
-        number = getTextNumberWindow();
-        formula = getTextFormulaWindow();
+        // 大きな画面の数字を取得
+        dispNumber = getTextNumberWindow();
+        // 小さな画面の数値を取得
+        dispFormula = getTextFormulaWindow();
 
 
+        // 計算記号が入力された場合
 
         switch (v.getId()){
             case R.id.plus:
@@ -165,14 +177,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-//        formulaWindow.setText(number + " " + symbol); // 上部に現在の入力結果を表示
-        setTextFormulaWindow(number + " " + symbol);
+//        formulaWindow.setText(dispNumber + " " + symbol); // 上部に現在の入力結果を表示
+//        setTextFormulaWindow(dispNumber + " " + symbol);
+        setTextFormulaWindow(dispFormula + " " + symbol);
 
-        if(num1 != 0) {
+        // 入力値が0でない場合（初期値=0)
+        if(dResult != 0) {
             calculateNumber();
         }
 
-        num1 = Double.parseDouble(number);
+//        dResult = Double.parseDouble(dispNumber);
+        dCalcNum = Double.parseDouble(dispNumber);
         isInput = true;
         //ここでnum1(一つ目の数字[A+B=のA]がセットされたことを判断するためのisInputをtrueにする。)
 
@@ -183,46 +198,52 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void onResult(View v){
-//        number = numberWindow.getText().toString();
-//        formula = formulaWindow.getText().toString();
+//        dispNumber = numberWindow.getText().toString();
+//        dispFormula = formulaWindow.getText().toString();
         calculateNumber();
 
     }
 
     private void calculateNumber() {
-        number = getTextNumberWindow();
-        formula = getTextFormulaWindow();
-        num2 = Double.parseDouble(number);
-        if(!number.equals("") && symbol != null){
+        dispNumber = getTextNumberWindow();
+        dispFormula = getTextFormulaWindow();
+        dCalcNum = Double.parseDouble(dispNumber);
+        if(!dispNumber.equals("") && symbol != null){
 
             switch (symbol){
                 case "+":
-                    num1 = num1 + num2;
+//                    dResult = Integer.parseInt(dispNumber) + dCalcNum;
+                    dResult = dResult + dCalcNum;
                     break;
 
                 case "-":
-                    num1 = num1 - num2;
+//                    dResult = Integer.parseInt(dispNumber) - dCalcNum;
+                    dResult = dResult - dCalcNum;
                     break;
 
                 case "*":
-                    num1 = num1 * num2;
+//                    dResult = Integer.parseInt(dispNumber) * dCalcNum;
+                    dResult = dResult * dCalcNum;
                     break;
 
                 case "/":
-                    num1 = num1 / num2;
+//                    dResult = Integer.parseInt(dispNumber) / dCalcNum;
+                    dResult = dResult / dCalcNum;
                     break;
 
                 default:
 
 
             }
-            if(num1 % 1 == 0){
-                numLong = (long)num1;   //
-//                numberWindow.setText(Long.toString(numLong));
-                setTextNumberWindow(Long.toString(numLong));
+
+            // 小数点を省略して表示
+            if(dResult % 1 == 0){
+                lngResult = (long) dResult;   //
+//                numberWindow.setText(Long.toString(lngResult));
+                setTextNumberWindow(Long.toString(lngResult));
             }else{
-//                numberWindow.setText(Double.toString(num1));
-                setTextNumberWindow(Double.toString(num1));
+//                numberWindow.setText(Double.toString(dResult));
+                setTextNumberWindow(Double.toString(dResult));
             }
 
 //            formulaWindow.setText("");
